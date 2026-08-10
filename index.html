@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cup Of Coffee | Order Online</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Arial,sans-serif;
+  background:#f7fbf8;
+  color:#18231d;
+}
+header{
+  background:white;
+  padding:18px 20px;
+  position:sticky;
+  top:0;
+  z-index:10;
+  box-shadow:0 2px 10px #0001;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.logo{
+  font-size:23px;
+  font-weight:800;
+}
+.cartBtn{
+  background:#174f3b;
+  color:white;
+  border:0;
+  border-radius:25px;
+  padding:11px 17px;
+  font-size:15px;
+}
+.hero{
+  background:linear-gradient(135deg,#dff3e7,#eaf5ff);
+  padding:45px 22px;
+  text-align:center;
+}
+.hero h1{
+  font-size:38px;
+  margin-bottom:12px;
+}
+.hero p{
+  font-size:17px;
+  line-height:1.5;
+  color:#53635a;
+}
+.orderBtn{
+  margin-top:20px;
+  background:#174f3b;
+  color:white;
+  border:0;
+  padding:14px 25px;
+  border-radius:28px;
+  font-size:17px;
+  font-weight:bold;
+}
+section{
+  padding:30px 18px;
+  max-width:900px;
+  margin:auto;
+}
+h2{
+  text-align:center;
+  margin-bottom:22px;
+  font-size:28px;
+}
+.categories{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  padding-bottom:15px;
+}
+.categories button{
+  white-space:nowrap;
+  border:1px solid #174f3b;
+  background:white;
+  color:#174f3b;
+  padding:9px 15px;
+  border-radius:20px;
+}
+.menu{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:16px;
+}
+.item{
+  background:white;
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 3px 15px #00000010;
+}
+.item h3{
+  font-size:19px;
+  margin-bottom:8px;
+}
+.item p{
+  color:#69756e;
+  font-size:14px;
+  min-height:38px;
+}
+.price{
+  font-size:19px;
+  font-weight:bold;
+  margin:13px 0;
+}
+.add{
+  width:100%;
+  padding:11px;
+  border:0;
+  border-radius:10px;
+  background:#174f3b;
+  color:white;
+  font-weight:bold;
+}
+.cart{
+  background:white;
+  margin:20px auto;
+  max-width:600px;
+  padding:22px;
+  border-radius:18px;
+  box-shadow:0 3px 15px #0002;
+  display:none;
+}
+.cart h2{text-align:left}
+.cartItem{
+  display:flex;
+  justify-content:space-between;
+  padding:10px 0;
+  border-bottom:1px solid #ddd;
+}
+.total{
+  font-size:21px;
+  font-weight:bold;
+  margin:18px 0;
+}
+input,textarea{
+  width:100%;
+  padding:13px;
+  margin:7px 0;
+  border:1px solid #ccc;
+  border-radius:9px;
+  font-size:15px;
+}
+.whatsapp{
+  width:100%;
+  background:#25d366;
+  color:white;
+  border:0;
+  padding:15px;
+  border-radius:10px;
+  font-size:17px;
+  font-weight:bold;
+}
+footer{
+  background:#174f3b;
+  color:white;
+  text-align:center;
+  padding:30px 15px;
+  margin-top:30px;
+}
+.small{
+  font-size:13px;
+  opacity:.8;
+  margin-top:8px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">☕ Cup Of Coffee</div>
+  <button class="cartBtn" onclick="showCart()">
+    🛒 Cart (<span id="count">0</span>)
+  </button>
+</header>
+
+<div class="hero">
+  <h1>Cup Of Coffee</h1>
+  <p>Fresh food, refreshing drinks & cafe vibes in Raja Park, Jaipur.</p>
+  <button class="orderBtn" onclick="document.getElementById('menu').scrollIntoView()">
+    Order Now
+  </button>
+</div>
+
+<section id="menu">
+
+<h2>Our Menu</h2>
+
+<div class="categories">
+  <button>All</button>
+  <button>Pizza</button>
+  <button>Burger</button>
+  <button>Sandwich</button>
+  <button>Maggi</button>
+  <button>Drinks</button>
+</div>
+
+<div class="menu">
+
+<div class="item">
+<h3>🍔 Aloo Tikki Burger</h3>
+<p>Crispy aloo tikki burger with fresh vegetables and sauces.</p>
+<div class="price">₹79</div>
+<button class="add" onclick="addItem('Aloo Tikki Burger',79)">Add to Cart</button>
+</div>
+
+<div class="item">
+<h3>🥪 Veg Grilled Sandwich</h3>
+<p>Grilled sandwich loaded with fresh vegetables and sauces.</p>
+<div class="price">₹89</div>
+<button class="add" onclick="addItem('Veg Grilled Sandwich',89)">Add to Cart</button>
+</div>
+
+<div class="item">
+<h3>🥪 Veg Cheese Sandwich</h3>
+<p>Grilled vegetable sandwich with delicious melted cheese.</p>
+<div class="price">₹109</div>
+<button class="add" onclick="addItem('Veg Cheese Sandwich',109)">Add to Cart</button>
+</div>
+
+<div class="item">
+<h3>🥪 Peri Peri Sandwich</h3>
+<p>Spicy peri peri sandwich with fresh vegetables.</p>
+<div class="price">₹99</div>
+<button class="add" onclick="addItem('Peri Peri Sandwich',99)">Add to Cart</button>
+</div>
+
+<div class="item">
+<h3>🍜 Plain Maggi</h3>
+<p>Classic hot and tasty Maggi.</p>
+<div class="price">₹79</div>
+<button class="add" onclick="addItem('Plain Maggi',79)">Add to Cart</button>
+</div>
+
+<div class="item">
+<h3>🍜 Vegetable Maggi</h3>
+<p>Maggi cooked with fresh vegetables and spices.</p>
+<div class="price">₹89</div>
+<button class="add" onclick="addItem('Vegetable Maggi',89)">Add to Cart</button>
+</div>
+
+<div class="item">
+<h3>🧀 Cheese Maggi</h3>
+<p>Creamy cheesy Maggi loaded with cheese.</p>
+<div class="price">₹109</div>
+<button class="add" onclick="addItem('Cheese Maggi',109)">Add to Cart</button>
+</div>
+
+<div class="item">
+<h3>🥤 Cold Coffee</h3>
+<p>Chilled creamy cafe-style cold coffee.</p>
+<div class="price">₹99</div>
+<button class="add" onclick="addItem('Cold Coffee',99)">Add to Cart</button>
+</div>
+
+<div class="item">
+<h3>🥤 Iced Latte</h3>
+<p>Refreshing chilled iced latte.</p>
+<div class="price">₹109</div>
+<button class="add" onclick="addItem('Iced Latte',109)">Add to Cart</button>
+</div>
+
+</div>
+</section>
+
+<div class="cart" id="cart">
+
+<h2>🛒 Your Cart</h2>
+
+<div id="cartItems"></div>
+
+<div class="total">
+  Total: ₹<span id="total">0</span>
+</div>
+
+<h3>Delivery Details</h3>
+
+<input id="name" placeholder="Your Name">
+<input id="phone" placeholder="Mobile Number">
+<textarea id="address" rows="3" placeholder="Full Delivery Address"></textarea>
+<input id="landmark" placeholder="Landmark">
+
+<button class="whatsapp" onclick="sendOrder()">
+  📲 Place Order on WhatsApp
+</button>
+
+</div>
+
+<footer>
+  <h2>Cup Of Coffee</h2>
+  <p>Raja Park, Jaipur</p>
+  <p>Open Daily: 10 AM - 4 AM</p>
+  <p class="small">Fresh Food • Good Coffee • Good Vibes</p>
+</footer>
+
+<script>
+
+let cart=[];
+
+function addItem(name,price){
+
+  let existing=cart.find(x=>x.name===name);
+
+  if(existing){
+    existing.qty++;
+  }else{
+    cart.push({
+      name:name,
+      price:price,
+      qty:1
+    });
+  }
+
+  updateCart();
+
+  alert(name + " added to cart!");
+}
+
+function updateCart(){
+
+  let html="";
+  let total=0;
+  let count=0;
+
+  cart.forEach((item,index)=>{
+
+    let amount=item.price*item.qty;
+
+    total+=amount;
+    count+=item.qty;
+
+    html+=`
+      <div class="cartItem">
+        <span>
+          ${item.name}<br>
+          ₹${item.price} × ${item.qty}
+        </span>
+
+        <span>
+          ₹${amount}
+          <br>
+          <button onclick="removeItem(${index})">❌</button>
+        </span>
+      </div>
+    `;
+  });
+
+  document.getElementById("cartItems").innerHTML=html;
+  document.getElementById("total").innerText=total;
+  document.getElementById("count").innerText=count;
+}
+
+function removeItem(index){
+
+  if(cart[index].qty>1){
+    cart[index].qty--;
+  }else{
+    cart.splice(index,1);
+  }
+
+  updateCart();
+}
+
+function showCart(){
+
+  document.getElementById("cart").style.display="block";
+
+  document.getElementById("cart").scrollIntoView({
+    behavior:"smooth"
+  });
+}
+
+function sendOrder(){
+
+  if(cart.length===0){
+    alert("Please add items to your cart.");
+    return;
+  }
+
+  let name=document.getElementById("name").value;
+  let phone=document.getElementById("phone").value;
+  let address=document.getElementById("address").value;
+  let landmark=document.getElementById("landmark").value;
+
+  if(!name || !phone || !address){
+    alert("Please fill Name, Mobile Number and Address.");
+    return;
+  }
+
+  let message="*Cup Of Coffee - New Order*%0A%0A";
+
+  cart.forEach(item=>{
+    message+=
+      item.name+" x "+item.qty+
+      " = ₹"+(item.price*item.qty)+"%0A";
+  });
+
+  let total=cart.reduce(
+    (sum,item)=>sum+(item.price*item.qty),0
+  );
+
+  message+="%0A*Total: ₹"+total+"*%0A%0A";
+
+  message+="*Customer Details*%0A";
+  message+="Name: "+name+"%0A";
+  message+="Mobile: "+phone+"%0A";
+  message+="Address: "+address+"%0A";
+  message+="Landmark: "+landmark;
+
+  /* IMPORTANT:
+     Replace 91XXXXXXXXXX with your Cup Of Coffee WhatsApp number.
+  */
+
+  let whatsappNumber="91XXXXXXXXXX";
+
+  window.open(
+    "https://wa.me/"+whatsappNumber+
+    "?text="+message,
+    "_blank"
+  );
+}
+
+</script>
+
+</body>
+</html>
